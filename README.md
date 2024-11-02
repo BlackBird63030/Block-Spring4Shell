@@ -1,17 +1,17 @@
 # CVE-2022-22965 (Spring4Shell) Blocker
 
-Firewall Server Handler - 
+## Firewall Server Handler - 
 This project is a proof-of-concept (POC) firewall server designed to detect and block attacks exploiting the CVE-2022-22965 vulnerability, commonly known as Spring4Shell. The server inspects incoming HTTP requests and blocks any that match known malicious patterns associated with this vulnerability.
 
-Overview
+## Overview
 
 The Firewall Server Handler is a simple Python-based HTTP server, built using the http.server library. It monitors incoming HTTP POST requests, looking for specific headers and payload patterns associated with the Spring4Shell vulnerability. If a request matches these patterns, it is blocked, and the server responds with a 403 Forbidden status.
 
-Requirements
+## Requirements
 
 - Python 3.x
 
-Setup and Usage
+## Setup and Usage
 
 1. Clone the Repository
    ```bash
@@ -26,9 +26,9 @@ Setup and Usage
    By default, the server will run on localhost at port 8000.
 
 3. Test the Firewall Rule
-   - To test, you can send POST requests that match or don't match the blocking rules, simulating attacks similar to Spring4Shell.
+   - To test, you can send use the tnt.py script that simulates the attack by doig 5 connections.
 
-Blocking Rules
+## Blocking Rules
 
 This POC uses two main rules to detect and block CVE-2022-22965 exploit attempts:
 
@@ -49,7 +49,7 @@ If either rule matches, the server responds with a 403 Forbidden status and retu
 If no conditions are met, the server responds with 200 OK and:
 {"message": "Request received"}
 
-Code Structure
+## Code Structure
 
 - ServerHandler: The main class handling HTTP requests.
   - block_request(): Sends a 403 response when a request is blocked.
@@ -57,7 +57,7 @@ Code Structure
   - rule_2(): Checks for specific headers known to be part of Spring4Shell exploits.
   - do_GET() and do_POST(): Process incoming GET and POST requests, applying the firewall rules.
 
-Example
+## Example
 
 To test the firewall, use a tool like curl to send a blocked request:
 ```bash
@@ -67,10 +67,10 @@ curl -X POST http://localhost:8000/tomcatwar.jsp   -H "suffix: %>//"   -H "C1: R
 The server will respond with:
 {"error": "Forbidden Access"}
 
-Purpose
+## Purpose
 
 This POC is intended for educational and testing purposes to demonstrate a basic firewall rule that blocks specific attack vectors targeting the Spring4Shell vulnerability. It is not a substitute for a comprehensive firewall solution in production environments.
 
-License
+## License
 
 MIT License
