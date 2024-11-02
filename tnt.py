@@ -3,7 +3,7 @@
 
 
 import http.client
-a
+
 
 host = "localhost"
 port = 8000
