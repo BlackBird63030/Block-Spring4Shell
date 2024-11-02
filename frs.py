@@ -16,7 +16,17 @@ class ServerHandler(BaseHTTPRequestHandler):
         self.wfile.write(b'{"error": "Forbidden Access"}')
         print("Blocking request")
 
-        def rule_1(): #Blocking payload
+    def handle_request(self):
+
+        def rule_1():  # Blocking POST request to /tomcatwar.jsp
+            if (self.command == "POST" and
+                self.path == "/tomcatwar.jsp" and
+                self.headers.get("Host") == "nbn.external.hostname"):
+                self.block_request()
+                return True
+            return False
+
+        def rule_2(): #Blocking payload
             content_length = int(self.headers.get('Content-Length', 0))
             post_data = self.rfile.read(content_length).decode('utf-8') if content_length > 0 else ""
 
@@ -25,17 +35,17 @@ class ServerHandler(BaseHTTPRequestHandler):
                 return True
             return False
 
-        def rule_2(): #Blocking headers
+        def rule_3(): #Blocking headers
             if (self.headers.get("suffix") == "%>//" and
                 self.headers.get("C1") == "Runtime" and
                 self.headers.get("C2") == "<%" and
                 self.headers.get("DNT") == "1" and
                 self.headers.get("Content-Type") == "application/x-www-form-urlencoded"):
-                self.block_request()  # Bloque la requête si les critères sont remplis
+                self.block_request() 
                 return True
             return False
 
-        if rule_1() or rule_2():#Conditions
+        if rule_1() or rule_2() or rule_3():#Conditions
             return
 
         self.send_response(200)
