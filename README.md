@@ -59,9 +59,9 @@ If no conditions are met, the server responds with 200 OK and:
 
 ## Example
 
-To test the firewall, use a tool like curl to send a blocked request:
+To test the firewall, use the tnt.py script. It gonna send 5 POST requests to the firewall script
 ```bash
-curl -X POST http://localhost:8000/tomcatwar.jsp   -H "suffix: %>//"   -H "C1: Runtime"   -H "C2: <%"
+python tnt.py
 ```
 
 The server will respond with:
