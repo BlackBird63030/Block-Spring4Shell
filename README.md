@@ -15,7 +15,7 @@ The Firewall Server Handler is a simple Python-based HTTP server, built using th
 
 1. Clone the Repository
    ```bash
-   git clone [https://github.com/BlackBird63030/Block-Spring4Shell]
+   git clone https://github.com/BlackBird63030/Block-Spring4Shell
    cd Block-Spring4Shell
    ```
 
